@@ -1,0 +1,66 @@
+.vertnav-container {
+	margin-top:10px;
+}
+
+#vertnav li .vertnav-cat {
+	display:block;
+	border-bottom:1px dotted gray;
+	padding:3px;
+	width:189px;
+}
+
+#vertnav li a {
+}
+
+#vertnav .inactive .vertnav-cat {
+	background-color:#C0C0C0;
+}
+
+#vertnav .next .vertnav-cat {
+	background-color:#DEDEDE;
+}
+
+#vertnav .prev .vertnav-cat {
+	background-color:#DEDEDE;
+}
+
+#vertnav .first .vertnav-cat {
+}
+
+#vertnav .last .vertnav-cat {
+}
+
+#vertnav .only .vertnav-cat {
+}
+
+#vertnav li.parent .vertnav-cat {
+	background-color:#E0E0E0;
+	font-weight:bold;
+}
+
+#vertnav li.active .vertnav-cat {
+	background-color:#FFFFFF;
+	font-weight:bold;
+}
+
+#vertnav li.inactive .vertnav-cat {
+	font-weight:normal;
+}
+
+#vertnav .level0 .vertnav-cat {
+}
+
+#vertnav .level1 .vertnav-cat {
+	padding-left:10px;
+	width:182px;
+}
+
+#vertnav .level2 .vertnav-cat {
+	padding-left:20px;
+	width:172px;
+}
+
+#vertnav .level3 .vertnav-cat {
+	padding-left:30px;
+	width:162px;
+}
