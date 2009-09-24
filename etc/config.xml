@@ -2,7 +2,7 @@
 <config>
     <modules>
         <RicoNeitzel_VertNav>
-            <version>0.2.1</version>
+            <version>0.2.2</version>
         </RicoNeitzel_VertNav>
     </modules>
 
@@ -12,6 +12,11 @@
 				<class>RicoNeitzel_VertNav_Block</class>
     		</vertnav>
     	</blocks>
+		<helpers>
+    		<vertnav>
+				<class>RicoNeitzel_VertNav_Helper</class>
+    		</vertnav>
+		</helpers>
     </global>
     <frontend>
         <layout>
@@ -37,6 +42,8 @@
     	<catalog>
     		<vertnav>
     			<display_product_count>0</display_product_count>
+				<expand_all>0</expand_all>
+				<expand_all_max_depth>0</expand_all_max_depth>
     		</vertnav>
     	</catalog>
     </default>

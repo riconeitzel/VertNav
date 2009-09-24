@@ -107,36 +107,36 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      *
      * @param Mage_Model_Catalog_Category $category
      * @param integer $level
-     * @param array $class
+     * @param array $levelClass
      * @return string
      */
-    public function drawOpenCategoryItem($category, $level=0, array $class=null)
+    public function drawOpenCategoryItem($category, $level=0, array $levelClass=null)
     {
-        $html = '';
+        $html = array();
 
     	//if (! $category instanceof Varien_Data_Tree_Node) return $html;
 
-        if ($this->_checkLoginCatalog()) return $html;
+        if ($this->_checkLoginCatalog()) return '';
 
-        if (! $category->getIsActive()) return $html;
+        if (! $category->getIsActive()) return '';
 
-        if (! isset($class)) $class = array();
-		$classColl = array();
+        if (! isset($levelClass)) $levelClass = array();
+		$combineClasses = array();
 
-        $classColl[] = 'level' . $level;
+        $combineClasses[] = 'level' . $level;
         if ($this->_isCurrentCategory($category))
         {
-        	$classColl[] = 'active';
+        	$combineClasses[] = 'active';
         }
         else
         {
-			$classColl[] = $this->isCategoryActive($category) ? 'parent' : 'inactive';
+			$combineClasses[] = $this->isCategoryActive($category) ? 'parent' : 'inactive';
         }
-		$class[] = implode('-', $classColl);
+		$levelClass[] = implode('-', $combineClasses);
 
-		$class = array_merge($class, $classColl);
+		$levelClass = array_merge($levelClass, $combineClasses);
 
-        $class[] = $this->_getClassNameFromCategoryName($category);
+        $levelClass[] = $this->_getClassNameFromCategoryName($category);
 
         $productCount = '';
         if (Mage::getStoreConfig('catalog/vertnav/display_product_count'))
@@ -145,11 +145,15 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         }
 
         // indent HTML!
-        $html .= str_pad ( "", ($level * 2 ) + 2, " " ).sprintf('<li class="%s">', implode(" ", $class))."\n";
+        $html[1] = str_pad ( "", (($level * 2 ) + 4), " " ).'<span class="vertnav-cat"><a href="'.$this->getCategoryUrl($category).'"><span>'.$this->htmlEscape($category->getName()).'</span></a>'.$productCount."</span>\n";
 
-        $html .= str_pad ( "", (($level * 2 ) + 4), " " ).'<span class="vertnav-cat"><a href="'.$this->getCategoryUrl($category).'"><span>'.$this->htmlEscape($category->getName()).'</span></a>'.$productCount."</span>\n";
-
-        if (in_array($category->getId(), $this->getCurrentCategoryPath()))
+		$autoMaxDepth = Mage::getStoreConfig('catalog/vertnav/expand_all_max_depth');
+		$autoExpand = Mage::getStoreConfig('catalog/vertnav/expand_all');
+		
+        if (in_array($category->getId(), $this->getCurrentCategoryPath())
+			|| ($autoExpand && $autoMaxDepth == 0)
+			|| ($autoExpand && $autoMaxDepth > $level)
+		)
         {
         	if ($category instanceof Mage_Catalog_Model_Category)
         	{
@@ -165,6 +169,8 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
             {
             	//$children = $this->toLinearArray($children);
                 $htmlChildren = '';
+
+				$levelClass[] = 'open';
 
                 foreach ($children as $i => $child)
                 {
@@ -186,15 +192,21 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
                 if (!empty($htmlChildren))
                 {
 					// indent HTML!
-                    $html.= str_pad ( "", ($level * 2 ) + 2, " " ).'<ul>'."\n"
+                    $html[2] = str_pad ( "", ($level * 2 ) + 2, " " ).'<ul>'."\n"
                             .$htmlChildren."\n".
                             str_pad ( "", ($level * 2 ) + 2, " " ).'</ul>';
                 }
             }
         }
+
+		// indent HTML!
+        $html[0] = str_pad ( "", ($level * 2 ) + 2, " " ).sprintf('<li class="%s">', implode(" ", $levelClass))."\n";
+
         // indent HTML!
-        $html.= "\n".str_pad ( "", ($level * 2 ) + 2, " " ).'</li>'."\n";
-        return $html;
+        $html[3] = "\n".str_pad ( "", ($level * 2 ) + 2, " " ).'</li>'."\n";
+		
+		ksort($html);
+        return implode('', $html);
     }
 
     /**
