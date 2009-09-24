@@ -170,8 +170,6 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
             	//$children = $this->toLinearArray($children);
                 $htmlChildren = '';
 
-				$levelClass[] = 'open';
-
                 foreach ($children as $i => $child)
                 {
                 	$class = array();
@@ -191,6 +189,8 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
                 if (!empty($htmlChildren))
                 {
+					$levelClass[] = 'open';
+
 					// indent HTML!
                     $html[2] = str_pad ( "", ($level * 2 ) + 2, " " ).'<ul>'."\n"
                             .$htmlChildren."\n".
