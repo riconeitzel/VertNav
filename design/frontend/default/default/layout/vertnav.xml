@@ -39,4 +39,9 @@
             <block type="vertnav/navigation" name="catalog.vertnav" template="vertnav/left.phtml" before="-" />
         </reference>
     </default>
+	<customer_account>
+		<reference name="left">
+			<action method="unsetChild"><name>catalog.vertnav</name></action>
+		</reference>
+	</customer_account>
 </layout>
