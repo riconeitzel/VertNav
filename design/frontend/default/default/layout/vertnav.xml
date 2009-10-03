@@ -33,7 +33,7 @@
         </reference>
         <!-- comment out the next three lines if you want to keep the top menu -->
         <reference name="top.menu">
-        	<remove name="catalog.topnav"/>
+			<remove name="catalog.topnav"/>
         </reference>
         <reference name="left">
             <block type="vertnav/navigation" name="catalog.vertnav" template="vertnav/left.phtml" before="-" />
