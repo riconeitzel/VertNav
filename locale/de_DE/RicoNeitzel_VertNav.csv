@@ -2,3 +2,12 @@
 "Expand all categories","Alle Kategorien öffnen"
 "Expand all max depth","Alle öffnen bis max. Tiefe"
 "Leave empty or set to 0 for no limit","Leer lassen oder auf 0 setzen für keine Einschränkung"
+"Hide Top Navigation","Top-Navigation verstecken"
+"Root Categories","Wurzel-Kategorien"
+"Store base","Store Basis"
+"Current category children","Aktuelle Unterkategorien"
+"Same level as current category","Gleiche Ebene wie aktuelle Kategorie"
+"Fallback to store base","Auf Store Basis zurückfallen"
+"If no current category is selected","Wenn keine aktuelle Kategorie ausgewählt ist"
+"Category Level %d","Kategorie Ebene %d"
+

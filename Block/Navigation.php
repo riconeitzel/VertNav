@@ -153,7 +153,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 		
         if (in_array($category->getId(), $this->getCurrentCategoryPath())
 			|| ($autoExpand && $autoMaxDepth == 0)
-			|| ($autoExpand && $autoMaxDepth > $level)
+			|| ($autoExpand && $autoMaxDepth > $level+1)
 		)
         {
         	if ($category instanceof Mage_Catalog_Model_Category)
@@ -283,20 +283,58 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 			return $this->_storeCategories;
 		}
 
+        /* @var $category Mage_Catalog_Model_Category */
+		$category = Mage::getModel('catalog/category');
+
+		$parent = false;
+		switch (Mage::getStoreConfig('catalog/vertnav/vertnav_root'))
+		{
+			case 'current':
+				if (Mage::registry('current_category'))
+				{
+					$parent = Mage::registry('current_category')->getId();
+				}
+				break;
+			case 'siblings':
+				if (Mage::registry('current_category'))
+				{
+					$parent = Mage::registry('current_category')->getParentId();
+				}
+				break;
+			case 'root':
+				$parent = Mage::app()->getStore()->getRootCategoryId();
+				break;
+			default:
+				/*
+				 * Display from level N
+				 */
+				$fromLevel = Mage::getStoreConfig('catalog/vertnav/vertnav_root');
+				if (Mage::registry('current_category') && Mage::registry('current_category')->getLevel() >= $fromLevel)
+				{
+					$cat = Mage::registry('current_category');
+					while ($cat->getLevel() > $fromLevel)
+					{
+						$cat = $cat->getParentCategory();
+					}
+					$parent = $cat->getId();
+				}
+		}
+		if (! $parent && Mage::getStoreConfig('catalog/vertnav/fallback_to_root'))
+		{
+			$parent = Mage::app()->getStore()->getRootCategoryId();
+		}
+
 		/**
 		 * Check if parent node of the store still exists
 		 */
-		$category = Mage::getModel('catalog/category');
-		
-        $parent = Mage::app()->getStore()->getRootCategoryId();
-        /* @var $category Mage_Catalog_Model_Category */
-		if (! $category->checkId($parent))
+		if (! $parent || ! $category->checkId($parent))
 		{
 			return array();
 		}
 		
 		$storeCategories = $category->getCollection()
 			->addIsActiveFilter()
+			->addAttributeToSelect('name')
 			->addFieldToFilter('parent_id', $parent)
 			->addAttributeToSort('position', 'ASC')
 		;
