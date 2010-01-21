@@ -139,11 +139,12 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
         $levelClass[] = $this->_getClassNameFromCategoryName($category);
 
-        $productCount = '';
-        if (Mage::getStoreConfig('catalog/vertnav/display_product_count'))
-        {
-        	$productCount = '<span class="product-count"> (' . $this->_getProductCount($category) . ')</span>';
-        }
+		$productCount = '';
+		if ($this->displayProductCount())
+		{
+			$n = $this->_getProductCount($category);
+			$productCount = '<span class="product-count"> (' . $n . ')</span>';
+		}
 
         // indent HTML!
         $html[1] = str_pad ( "", (($level * 2 ) + 4), " " ).'<span class="vertnav-cat"><a href="'.$this->getCategoryUrl($category).'"><span>'.$this->htmlEscape($category->getName()).'</span></a>'.$productCount."</span>\n";
@@ -156,14 +157,14 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 			|| ($autoExpand && $autoMaxDepth > $level+1)
 		)
         {
-        	if ($category instanceof Mage_Catalog_Model_Category)
-        	{
-            	$children = $this->toLinearArray($category->getChildrenCategories());
-        	}
-        	else
-        	{
-        		$children = $category->getChildren();
-        	}
+			$children = $category->getChildrenCategories();
+			if ($this->displayProductCount())
+			{
+				$this->_addProductCount($children);
+			}
+			$children = $this->toLinearArray($children);
+
+			//usort($children, array($this, '_sortCategoryArrayByName'));
 
             $hasChildren = $children && ($childrenCount = count($children));
             if ($hasChildren)
@@ -224,6 +225,11 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
     	return $array;
     }
 
+	protected function _sortCategoryArrayByName($a, $b)
+	{
+		return strcoll($a->getName(), $b->getName());
+	}
+
     protected function _getClassNameFromCategoryName($category)
     {
     	$name = $category->getName();
@@ -254,14 +260,17 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
 	protected function _getProductCount($category)
 	{
-		$count = 0;
-		if ($category instanceof Mage_Catalog_Model_Category)
+		if (null === ($count = $category->getData('product_count')))
 		{
-			$count =  $category->getProductCount();
-		}
-		elseif ($category instanceof Varien_Data_Tree_Node)
-		{
-			$count = $this->_getProductCountFromTreeNode($category);
+			$count = 0;
+			if ($category instanceof Mage_Catalog_Model_Category)
+			{
+				$count =  $category->getProductCount();
+			}
+			elseif ($category instanceof Varien_Data_Tree_Node)
+			{
+				$count = $this->_getProductCountFromTreeNode($category);
+			}
 		}
 		return $count;
 	}
@@ -338,8 +347,46 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 			->addFieldToFilter('parent_id', $parent)
 			->addAttributeToSort('position', 'ASC')
 		;
+		if ($this->displayProductCount())
+		{
+			$this->_addProductCount($storeCategories);
+		}
 		
 		$this->_storeCategories = $storeCategories;
 		return $storeCategories;
+	}
+
+	protected function _addProductCount($collection)
+	{
+		if ($collection instanceof Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection)
+		{
+			if ($collection->isLoaded())
+			{
+				$collection->loadProductCount($collection->getItems());
+			}
+			else
+			{
+				$collection->setLoadProductCount(true);
+			}
+		}
+		else
+		{
+			$this->_getProductCollectionResource()->addCountToCategories($collection);
+		}
+		return $this;
+	}
+
+	protected function _getProductCollectionResource()
+	{
+		if (null === $this->_productCollection)
+		{
+			$this->_productCollection = Mage::getResourceModel('catalog/product_collection');
+		}
+		return $this->_productCollection;
+	}
+
+	public function displayProductCount()
+	{
+		return Mage::getStoreConfigFlag('catalog/vertnav/display_product_count');
 	}
 }
