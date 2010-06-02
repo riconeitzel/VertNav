@@ -136,9 +136,9 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 		$levelClass[] = implode('-', $combineClasses);
 
 		$levelClass = array_merge($levelClass, $combineClasses);
-
-        $levelClass[] = $this->_getClassNameFromCategoryName($category);
-
+		
+		$levelClass[] =  $this->_getClassNameFromCategoryName($category);
+		
 		$productCount = '';
 		if ($this->displayProductCount())
 		{
