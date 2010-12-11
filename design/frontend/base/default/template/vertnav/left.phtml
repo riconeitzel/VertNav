@@ -35,11 +35,11 @@
 <div class="vertnav-container">
     <div class="">
         <h4 class="no-display"><?php echo $this->__('Category Navigation:') ?></h4>
-        <ul id="vertnav">
 <?php $store_categories = $this->toLinearArray($this->getStoreCategories()) ?>
-<?php $count = count($store_categories) ?>
-<?php foreach ($store_categories as $i => $_category): ?>
-<?php $class = array() ?>
+<?php if ($count = count($store_categories)): ?>
+		<ul id="vertnav">
+<?php endif; ?>
+<?php foreach ($store_categories as $i => $_category): ?><?php $class = array() ?>
 <?php if ($count == 1): ?>
 <?php $class[] = 'only' ?>
 <?php elseif (! $i): ?>
@@ -51,6 +51,8 @@
 <?php if (isset($store_categories[$i-1]) && $this->isCategoryActive($store_categories[$i-1])) $class[] = 'next'; ?>
 <?php echo $this->drawOpenCategoryItem($_category, 0, $class) ?>
 <?php endforeach ?>
+<?php if ($count): ?>
         </ul>
+<?php endif; ?>
     </div>
 </div>
