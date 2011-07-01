@@ -36,13 +36,19 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 	 * Netzarbeiter_GroupsCatalog
 	 * Netzarbeiter_LoginCatalog
 	 *
+	 * Also add the current product and current cms page id if they exist if
+	 * this block has been added to a cms or product detail page.
+	 *
 	 * @return string
 	 */
     public function getCacheKey()
     {
-        $key = 'VERTNAV_' . parent::getCacheKey();
-        $key .= $this->_getCustomerGroupId();
-        return $key;
+        $key = parent::getCacheKey();
+        $customerGroupId = $this->_getCustomerGroupId();
+		$productId = Mage::registry('current_product') ? Mage::registry('current_product') : 0;
+		$cmsPageId = Mage::app()->getRequest()->getParam('page_id', Mage::getStoreConfig(Mage_Cms_Helper_Page::XML_PATH_HOME_PAGE));
+
+        return 'VERTNAV_' . $key . '_' . $customerGroupId . '_' . $productId . '_' . $cmsPageId;
     }
 
     /**
@@ -323,6 +329,19 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 					$parent = $cat->getId();
 				}
 		}
+
+		/**
+		 * Thanks to thebod for this patch!
+		 * It enables the setting of the category ID to use via Layout XML:
+		 * 
+		 * <reference name="catalog.vertnav">
+		 *	<action method="setCategoryId"><category_id>8</category_id></action>
+		 * </reference>
+		 */
+		if ($customId = $this->getCategoryId()) {
+			$parent = $customId;
+		}
+		
 		if (! $parent && Mage::getStoreConfig('catalog/vertnav/fallback_to_root'))
 		{
 			$parent = Mage::app()->getStore()->getRootCategoryId();
