@@ -1,0 +1,10 @@
+#
+# VertNav modman file
+#
+
+app/code/community/RicoNeitzel/VertNav app/code/community/RicoNeitzel/VertNav
+app/design/frontend/base/default/layout/vertnav.xml app/design/frontend/base/default/layout/vertnav.xml
+app/locale/de_DE/RicoNeitzel_VertNav.csv app/locale/de_DE/RicoNeitzel_VertNav.csv
+app/locale/es_MX/RicoNeitzel_VertNav.csv app/locale/es_MX/RicoNeitzel_VertNav.csv
+app/etc/modules/RicoNeitzel_VertNav.xml app/etc/modules/RicoNeitzel_VertNav.xml
+skin/frontend/base/default/css/vertnav.css skin/frontend/base/default/css/vertnav.css
