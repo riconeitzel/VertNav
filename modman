@@ -4,6 +4,7 @@
 
 app/code/community/RicoNeitzel/VertNav app/code/community/RicoNeitzel/VertNav
 app/design/frontend/base/default/layout/vertnav.xml app/design/frontend/base/default/layout/vertnav.xml
+app/design/frontend/base/default/template/vertnav app/design/frontend/base/default/template/vertnav
 app/locale/de_DE/RicoNeitzel_VertNav.csv app/locale/de_DE/RicoNeitzel_VertNav.csv
 app/locale/es_MX/RicoNeitzel_VertNav.csv app/locale/es_MX/RicoNeitzel_VertNav.csv
 app/etc/modules/RicoNeitzel_VertNav.xml app/etc/modules/RicoNeitzel_VertNav.xml
