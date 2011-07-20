@@ -118,6 +118,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
         if ($this->_checkLoginCatalog()) return '';
         if (! $category->getIsActive()) return '';
+        if ($category->getIncludeInMenu()) return '';
 
         if (! isset($levelClass)) $levelClass = array();
 		$combineClasses = array();
