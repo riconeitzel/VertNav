@@ -45,7 +45,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
     {
         $key = parent::getCacheKey();
         $customerGroupId = $this->_getCustomerGroupId();
-		$productId = Mage::registry('current_product') ? Mage::registry('current_product') : 0;
+		$productId = Mage::registry('current_product') ? Mage::registry('current_product')->_data['entity_id'] : 0;
 		$cmsPageId = Mage::app()->getRequest()->getParam('page_id', Mage::getStoreConfig(Mage_Cms_Helper_Page::XML_PATH_HOME_PAGE));
 
         return 'VERTNAV_' . $key . '_' . $customerGroupId . '_' . $productId . '_' . $cmsPageId;
