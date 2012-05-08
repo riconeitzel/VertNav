@@ -135,13 +135,13 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 		$levelClass[] = implode('-', $combineClasses);
 
 		$levelClass = array_merge($levelClass, $combineClasses);
-		
+
 		$levelClass[] =  $this->_getClassNameFromCategoryName($category);
-		
+
 		$productCount = '';
 		if ($this->displayProductCount())
 		{
-			$n = $this->_getProductCount($category);
+			$n = Mage::getModel('catalog/layer')->setCurrentCategory($category->getID())->getProductCollection()->getSize();
 			$productCount = '<span class="product-count"> (' . $n . ')</span>';
 		}
 
@@ -150,14 +150,14 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
 		$autoMaxDepth = Mage::getStoreConfig('catalog/vertnav/expand_all_max_depth');
 		$autoExpand = Mage::getStoreConfig('catalog/vertnav/expand_all');
-		
+
         if (in_array($category->getId(), $this->getCurrentCategoryPath())
 			|| ($autoExpand && $autoMaxDepth == 0)
 			|| ($autoExpand && $autoMaxDepth > $level+1)
 		) {
 			$children = $this->_getCategoryCollection()
 				->addIdFilter($category->getChildren());
-			
+
 			$children = $this->toLinearArray($children);
 
 			//usort($children, array($this, '_sortCategoryArrayByName'));
@@ -202,7 +202,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
         // indent HTML!
         $html[3] = "\n".str_pad ( "", ($level * 2 ) + 2, " " ).'</li>'."\n";
-		
+
 		ksort($html);
         return implode('', $html);
     }
@@ -360,7 +360,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 		/**
 		 * Thanks to thebod for this patch!
 		 * It enables the setting of the category ID to use via Layout XML:
-		 * 
+		 *
 		 * <reference name="catalog.vertnav">
 		 *	<action method="setCategoryId"><category_id>8</category_id></action>
 		 * </reference>
@@ -368,7 +368,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 		if ($customId = $this->getCategoryId()) {
 			$parent = $customId;
 		}
-		
+
 		if (! $parent && Mage::getStoreConfig('catalog/vertnav/fallback_to_root'))
 		{
 			$parent = Mage::app()->getStore()->getRootCategoryId();
@@ -383,7 +383,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 		}
 		$storeCategories = $this->_getCategoryCollection()
 			->addFieldToFilter('parent_id', $parent);
-		
+
 		$this->_storeCategories = $storeCategories;
 		return $storeCategories;
 	}
@@ -409,7 +409,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 		{
 			$collection->setLoadProductCount(true);
 		}
-		
+
 		return $collection;
 	}
 
