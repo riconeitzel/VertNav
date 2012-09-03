@@ -12,3 +12,5 @@ app/design/frontend/base/default/layout/vertnav.xml app/design/frontend/default/
 app/design/frontend/base/default/template/vertnav app/design/frontend/default/default/template/vertnav
 skin/frontend/base/default/css/vertnav.css skin/frontend/base/default/css/vertnav.css
 skin/frontend/base/default/css/vertnav.css skin/frontend/default/default/css/vertnav.css
+package/connect/RicoNeitzel_VertNav.xml var/connect/RicoNeitzel_VertNav.xml
+package/pear/RicoNeitzel_VertNav.xml var/pear/RicoNeitzel_VertNav.xml
