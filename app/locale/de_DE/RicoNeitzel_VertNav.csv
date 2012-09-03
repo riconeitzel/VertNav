@@ -10,3 +10,5 @@
 "Fallback to store base","Auf Store Basis zurückfallen"
 "If no current category is selected","Wenn keine aktuelle Kategorie ausgewählt ist"
 "Category Level %d","Kategorie Ebene %d"
+"Expand on Top Level","Aufklappen, wenn Artikel direkt aufgerufen wird"
+"If a product is top level requested without a category path should VertNav expand the category listing to the first associated category.","Soll der Kategoriebaum zur ersten, dem Artikel zugewiesenen Kategorie aufgeklappt werden, wenn der Artikel direkt (ohne Kategoriepfad in der URL) aufgerufen wurde?"

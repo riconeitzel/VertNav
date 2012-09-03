@@ -323,6 +323,19 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         /* @var $category Mage_Catalog_Model_Category */
 		$category = Mage::getModel('catalog/category');
 
+		/* Set Category Object if Product is requested without category path in URI (top level request). Takes first Category of a Product as Category Object*/
+
+		if( true == (bool) Mage::getStoreConfig( 'catalog/vertnav/show_cat_on_toplevel' ) &&
+			false == Mage::registry('current_category') &&
+			false != Mage::registry('current_product') ) {
+			$product_categories = Mage::registry( 'current_product' )->getCategoryIds();
+			if(count($product_categories) > 0) {
+				$new_active_category = Mage::getModel('catalog/category')->load($product_categories[0]);
+				Mage::register('current_category', $new_active_category);
+			}
+		}
+
+
 		$parent = false;
 		switch (Mage::getStoreConfig('catalog/vertnav/vertnav_root'))
 		{
