@@ -10,18 +10,21 @@
    <description>Lots of css selectors available.</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>0.3.1</version>
+   <version>0.4.1</version>
    <stability>stable</stability>
    <notes>Add a vertical menu to your site. Features many css classes and several configuration options.</notes>
    <authors>
       <name>
          <name>Vinai Kopp</name>
+         <name>Rico Neitzel</name>
       </name>
       <user>
          <user>vinai</user>
+         <user>rizi</user>
       </user>
       <email>
          <email>vinai@netzarbeiter.com</email>
+         <email>rico@buro71a.de</email>
       </email>
    </authors>
    <depends_php_min>5.2.6</depends_php_min>

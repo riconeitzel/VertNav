@@ -7,7 +7,7 @@
    <description>Lots of css selectors available.</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <release_version>0.3.0</release_version>
+   <release_version>0.4.1</release_version>
    <api_version>1.2.0.1</api_version>
    <release_stability>stable</release_stability>
    <api_stability>stable</api_stability>
@@ -18,19 +18,19 @@
          <role>lead</role>
       </role>
       <name>
-         <name/>
+         <name>Rico Neitzel</name>
          <name>Vinai Kopp</name>
       </name>
       <handle>
-         <handle/>
+         <handle>rizi</handle>
          <handle>vinai</handle>
       </handle>
       <email>
-         <email/>
+         <email>rico@buro71a.de</email>
          <email>vinai@netzarbeiter.com</email>
       </email>
       <active>
-         <active>0</active>
+         <active>1</active>
          <active>1</active>
       </active>
    </maintainers>
