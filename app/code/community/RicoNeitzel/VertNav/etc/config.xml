@@ -28,21 +28,21 @@
     </modules>
 
     <global>
-    	<blocks>
-    		<vertnav>
-				<class>RicoNeitzel_VertNav_Block</class>
-    		</vertnav>
-    	</blocks>
-    	<models>
-    		<vertnav>
-				<class>RicoNeitzel_VertNav_Model</class>
-    		</vertnav>
-    	</models>
-		<helpers>
-    		<vertnav>
-				<class>RicoNeitzel_VertNav_Helper</class>
-    		</vertnav>
-		</helpers>
+        <blocks>
+            <vertnav>
+                <class>RicoNeitzel_VertNav_Block</class>
+            </vertnav>
+        </blocks>
+        <models>
+            <vertnav>
+                <class>RicoNeitzel_VertNav_Model</class>
+            </vertnav>
+        </models>
+        <helpers>
+            <vertnav>
+                <class>RicoNeitzel_VertNav_Helper</class>
+            </vertnav>
+        </helpers>
     </global>
     <frontend>
         <layout>
@@ -54,28 +54,28 @@
         </layout>
     </frontend>
     <adminhtml>
-    	<translate>
-    		<modules>
-    			<RicoNeitzel_VertNav>
-    				<files>
-    					<default>RicoNeitzel_VertNav.csv</default>
-    				</files>
-    			</RicoNeitzel_VertNav>
-    		</modules>
-    	</translate>
+        <translate>
+            <modules>
+                <RicoNeitzel_VertNav>
+                    <files>
+                        <default>RicoNeitzel_VertNav.csv</default>
+                    </files>
+                </RicoNeitzel_VertNav>
+            </modules>
+        </translate>
     </adminhtml>
     <default>
-    	<catalog>
-    		<vertnav>
-    			<display_product_count>0</display_product_count>
-				<expand_all>0</expand_all>
-				<expand_all_max_depth>0</expand_all_max_depth>
+        <catalog>
+            <vertnav>
+                <display_product_count>0</display_product_count>
+                <expand_all>0</expand_all>
+                <expand_all_max_depth>0</expand_all_max_depth>
                 <hide_top>1</hide_top>
                 <hide_vertnav>0</hide_vertnav>
-				<vertnav_root>root</vertnav_root>
-				<fallback_to_root>1</fallback_to_root>
-    		</vertnav>
-    	</catalog>
+                <vertnav_root>root</vertnav_root>
+                <fallback_to_root>1</fallback_to_root>
+            </vertnav>
+        </catalog>
     </default>
 </config>
 

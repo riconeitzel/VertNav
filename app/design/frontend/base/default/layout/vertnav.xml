@@ -29,33 +29,47 @@
 <layout version="0.1.0">
     <default>
         <reference name="head">
-        	<action method="addItem"><type>skin_css</type><name>css/vertnav.css</name></action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/vertnav.css</name>
+            </action>
         </reference>
         <reference name="top.menu">
-			<action method="unsetChild" ifconfig="catalog/vertnav/hide_top"><name>catalog.topnav</name></action>
+            <action method="unsetChild" ifconfig="catalog/vertnav/hide_top">
+                <name>catalog.topnav</name>
+            </action>
         </reference>
         <reference name="left">
-            <block type="vertnav/navigation" name="catalog.vertnav" template="vertnav/left.phtml" before="-" />
+            <block type="vertnav/navigation" name="catalog.vertnav" template="vertnav/left.phtml" before="-"/>
         </reference>
         <reference name="left">
-            <action method="unsetChild" ifconfig="catalog/vertnav/hide_vertnav"><name>catalog.vertnav</name></action>
-        </reference>    </default>
+            <action method="unsetChild" ifconfig="catalog/vertnav/hide_vertnav">
+                <name>catalog.vertnav</name>
+            </action>
+        </reference>
+    </default>
 
-	<customer_account>
-		<reference name="left">
-			<action method="unsetChild"><name>catalog.vertnav</name></action>
-		</reference>
-	</customer_account>
+    <customer_account>
+        <reference name="left">
+            <action method="unsetChild">
+                <name>catalog.vertnav</name>
+            </action>
+        </reference>
+    </customer_account>
 
-	<catalog_category_default>
-		<reference name="left">
-			<action method="unsetChild"><name>catalog.leftnav</name></action>
-		</reference>
-	</catalog_category_default>
+    <catalog_category_default>
+        <reference name="left">
+            <action method="unsetChild">
+                <name>catalog.leftnav</name>
+            </action>
+        </reference>
+    </catalog_category_default>
 
-	<catalog_category_layered>
-		<reference name="catalog.leftnav">
-			<action method="unsetChild"><name>category_filter</name></action>
-		</reference>
-	</catalog_category_layered>
+    <catalog_category_layered>
+        <reference name="catalog.leftnav">
+            <action method="unsetChild">
+                <name>category_filter</name>
+            </action>
+        </reference>
+    </catalog_category_layered>
 </layout>
