@@ -23,7 +23,7 @@
 <config>
     <modules>
         <RicoNeitzel_VertNav>
-            <version>0.4.0</version>
+            <version>0.4.1</version>
         </RicoNeitzel_VertNav>
     </modules>
 
