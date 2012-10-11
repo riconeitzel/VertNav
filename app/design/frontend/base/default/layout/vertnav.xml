@@ -37,7 +37,9 @@
         <reference name="left">
             <block type="vertnav/navigation" name="catalog.vertnav" template="vertnav/left.phtml" before="-" />
         </reference>
-    </default>
+        <reference name="left">
+            <action method="unsetChild" ifconfig="catalog/vertnav/hide_vertnav"><name>catalog.vertnav</name></action>
+        </reference>    </default>
 
 	<customer_account>
 		<reference name="left">
