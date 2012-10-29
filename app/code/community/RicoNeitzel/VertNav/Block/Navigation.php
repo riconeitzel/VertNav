@@ -142,6 +142,10 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         }
         $levelClass[ ] = implode( '-', $combineClasses );
 
+        if($category->hasChildren()) {
+        	$levelClass[ ] = 'has-children';
+        }
+
         $levelClass = array_merge( $levelClass, $combineClasses );
 
         $levelClass[ ] = $this->_getClassNameFromCategoryName( $category );
