@@ -3,9 +3,10 @@ Vertical Navigation with CSS Classes
 Vertical Category Navigation with subcategories, fine css classes and backend configuration.
 
 <p>With this extension you're able to design you own vertical category navigation with subcategories and product count display. Each element has a fine css'ing so you can address each element or group exactly including "first" and "last" element per group and "previos", "active" and "next" child.</p>
-<p>The module removes the top.navigation via XML-Update and places the vertical nav in "left" structural block. You can change this by copying and modifying the vertnav.xml file.</p>
+<p>By default the module removes the top.navigation via XML-Update and places the vertical nav in "left" structural block.</p>
 <p>Several options can be controlled in your AdminPanel under <strong>system -> configuration -> catalog</strong> as per StoreView:</p>
 <ul>
+<li>Hide Vertical Navigation (yes/no)</li>
 <li>Hide Top Navigation (yes/no)</li>
 <li>Display Product Count (yes/no)</li>
 <li>Expand on Top Level (yes/no)</li>
@@ -14,10 +15,15 @@ Vertical Category Navigation with subcategories, fine css classes and backend co
 <li>Root Categories (Store base, current Category, Same Level as current Category, Category Level 2, Category Level 3)</li>
 <li>Fallback to store base (yes/no)</li>
 </ul>
-<p>You should modify the vertnav.css-file in your skin folder to fit you needs. (Please note: do not change the base/default skin file! The delivered CSS file is for showcase purposes only!)</p>
+<p>You should modify the vertnav.css-file in your skin folder to fit your needs. (Please note: do not change the base/default skin file! The delivered CSS file is for showcase purposes only!)</p>
+
+<h2>Credits</h2>
+<p>Rico Neitzel, Vinai Kopp, Raúl Fishman</p>
 
 <h2>Change Log</h2>
 <ul>
+<li><strong>v0.4.2:</strong> Added Portuguese Locale (Thanks Raúl Fishman)</li>
+<li><strong>v0.4.1:</strong> Added Feature <strong>Disable on StoreView Base</strong></li>
 <li><strong>v0.4.0:</strong> Added Feature <strong>Expand on Top Level Request:</strong> If a product is requested without categories in the URL vert nav can figure out the first assigned category and expands the category tree.</li>
 <li><strong>v0.2.8:</strong> Enable/Disable TopNav in Admin-Config - now without changing XML-Files. Define which Levels should be shown on storefront.</li>
 <li><strong>v0.2.3:</strong> You can now setup whether VertNav should show EVERYTHING (nice for jQuery) or just a few levels in the category tree.</li>
