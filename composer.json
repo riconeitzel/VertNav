@@ -1,0 +1,19 @@
+{
+    "name":"riconeitzel/vertical-navigation",
+    "type":"magento-module",
+    "license":"OSL-3.0",
+    "homepage":"https://github.com/riconeitzel/VertNav",
+    "description":"Vertical Navigation with CSS Classes.",
+    "authors":[
+        {
+            "name":"Rico Neitzel"
+        },
+        {
+            "name":"Vinai Kopp",
+            "email":"vinai@netzarbeiter.com"
+        }
+    ],
+    "require":{
+        "magento-hackathon/magento-composer-installer":"dev-master"
+    }
+}
