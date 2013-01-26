@@ -49,6 +49,7 @@
 <?php endif; ?>
 <?php if (isset($store_categories[$i+1]) && $this->isCategoryActive($store_categories[$i+1])) $class[] = 'prev'; ?>
 <?php if (isset($store_categories[$i-1]) && $this->isCategoryActive($store_categories[$i-1])) $class[] = 'next'; ?>
+<?php if ($_category->getProductCount() === 0) $class[] = 'empty'; ?>
 <?php echo $this->drawOpenCategoryItem($_category, 0, $class) ?>
 <?php endforeach ?>
 <?php if ($count): ?>
