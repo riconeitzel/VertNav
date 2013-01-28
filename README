@@ -22,6 +22,7 @@ Vertical Category Navigation with subcategories, fine css classes and backend co
 
 <h2>Change Log</h2>
 <ul>
+<li><strong>v0.4.3:</strong> Added 'empty' CSS class for categories without products (Thanks Sija via GitHub)</li>
 <li><strong>v0.4.2:</strong> Added Portuguese Locale (Thanks Raúl Fishman)</li>
 <li><strong>v0.4.1:</strong> Added Feature <strong>Disable on StoreView Base</strong></li>
 <li><strong>v0.4.0:</strong> Added Feature <strong>Expand on Top Level Request:</strong> If a product is requested without categories in the URL vert nav can figure out the first assigned category and expands the category tree.</li>
