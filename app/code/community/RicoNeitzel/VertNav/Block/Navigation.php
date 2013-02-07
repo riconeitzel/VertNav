@@ -143,7 +143,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         $levelClass[ ] = implode( '-', $combineClasses );
 
         if($category->hasChildren()) {
-        	$levelClass[ ] = 'has-children';
+            $levelClass[ ] = 'has-children';
         }
 
         $levelClass = array_merge( $levelClass, $combineClasses );
@@ -354,6 +354,25 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
             }
         }
 
+        $parent = $this->getRootCategoryId();
+        /**
+         * Check if parent node of the store still exists
+         */
+        if( !$parent || !$category->checkId( $parent ) ) {
+            return array ();
+        }
+        $storeCategories = $this->_getCategoryCollection()->addFieldToFilter( 'parent_id', $parent );
+
+        $this->_storeCategories = $storeCategories;
+        return $storeCategories;
+    }
+
+    /**
+     * Get root category id for vertical navigation
+     * @return int
+     */
+    public function getRootCategoryId()
+    {
         $parent = FALSE;
         switch( Mage::getStoreConfig( 'catalog/vertnav/vertnav_root' ) ) {
             case 'current':
@@ -397,17 +416,19 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         if( !$parent && Mage::getStoreConfig( 'catalog/vertnav/fallback_to_root' ) ) {
             $parent = Mage::app()->getStore()->getRootCategoryId();
         }
+        return $parent;
+    }
 
-        /**
-         * Check if parent node of the store still exists
-         */
-        if( !$parent || !$category->checkId( $parent ) ) {
-            return array ();
+    /**
+     * Loads root category for vertical naviation
+     * @return Mage_Catalog_Model_Category
+     **/
+    public function getRootCategory()
+    {
+        $id = $this->getRootCategoryId();
+        if ($id) {
+            return Mage::getModel('catalog/category')->load($id);
         }
-        $storeCategories = $this->_getCategoryCollection()->addFieldToFilter( 'parent_id', $parent );
-
-        $this->_storeCategories = $storeCategories;
-        return $storeCategories;
     }
 
     /**
