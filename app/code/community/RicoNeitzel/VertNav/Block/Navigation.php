@@ -31,6 +31,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 {
 
     protected $_storeCategories;
+    protected $_rootCategoryId;
 
     /**
      * Add the customer group to the cache key so this module is compatible with more extensions.
@@ -373,6 +374,9 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      */
     public function getRootCategoryId()
     {
+        if ( $this->_rootCategoryId ) {
+            return $this->_rootCategoryId;
+        }
         $parent = FALSE;
         switch( Mage::getStoreConfig( 'catalog/vertnav/vertnav_root' ) ) {
             case 'current':
@@ -416,7 +420,8 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         if( !$parent && Mage::getStoreConfig( 'catalog/vertnav/fallback_to_root' ) ) {
             $parent = Mage::app()->getStore()->getRootCategoryId();
         }
-        return $parent;
+        $this->_rootCategoryId = $parent;
+        return $this->_rootCategoryId;
     }
 
     /**
@@ -426,8 +431,8 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
     public function getRootCategory()
     {
         $id = $this->getRootCategoryId();
-        if ($id) {
-            return Mage::getModel('catalog/category')->load($id);
+        if ( $id ) {
+            return Mage::getModel( 'catalog/category' )->load( $id );
         }
     }
 
