@@ -21,16 +21,16 @@
  */
 -->
 <config>
-	<sections>
-		<catalog translate="label" module="catalog">
-			<groups>
-				<vertnav translate="label" module="vertnav">
-					<label>Category Vertical Navigation</label>
-					<sort_order>500</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>1</show_in_store>
-					<fields>
+    <sections>
+        <catalog translate="label" module="catalog">
+            <groups>
+                <vertnav translate="label" module="vertnav">
+                    <label>Category Vertical Navigation</label>
+                    <sort_order>500</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
                         <hide_vertnav translate="label" module="vertnav">
                             <label>Hide Vertical Navigation</label>
                             <frontend_type>select</frontend_type>
@@ -40,74 +40,74 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </hide_vertnav>
-						<hide_top translate="label" module="vertnav">
-							<label>Hide Top Navigation</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</hide_top>
-						<display_product_count translate="label" module="vertnav">
-							<label>Display Product Count</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>20</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</display_product_count>
-						<expand_all translate="label" module="vertnav">
-							<label>Expand all categories</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>30</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</expand_all>
-						<expand_all_max_depth translate="label,comment" module="vertnav">
-							<label>Expand all max depth</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>40</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<comment>Leave empty or set to 0 for no limit</comment>
-						</expand_all_max_depth>
-						<show_cat_on_toplevel translate="label,comment" module="vertnav">
-							<label>Expand on Top Level</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>30</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<comment>If your product is top level requested without a category path should VertNav expand the category listing to the first associated product category.</comment>
-						</show_cat_on_toplevel>
-						<vertnav_root translate="label" module="vertnav">
-							<label>Root Categories</label>
-							<frontend_type>select</frontend_type>
-							<source_model>vertnav/system_config_source_root</source_model>
-							<sort_order>50</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</vertnav_root>
-						<fallback_to_root translate="label" module="vertnav">
-							<label>Fallback to store base</label>
-							<comment>If no current category is selected</comment>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>60</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</fallback_to_root>
-					</fields>
-				</vertnav>
-			</groups>
-		</catalog>
-	</sections>
+                        <hide_top translate="label" module="vertnav">
+                            <label>Hide Top Navigation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hide_top>
+                        <display_product_count translate="label" module="vertnav">
+                            <label>Display Product Count</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_product_count>
+                        <expand_all translate="label" module="vertnav">
+                            <label>Expand all categories</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </expand_all>
+                        <expand_all_max_depth translate="label,comment" module="vertnav">
+                            <label>Expand all max depth</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Leave empty or set to 0 for no limit</comment>
+                        </expand_all_max_depth>
+                        <show_cat_on_toplevel translate="label,comment" module="vertnav">
+                            <label>Expand on Top Level</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If your product is top level requested without a category path should VertNav expand the category listing to the first associated product category.</comment>
+                        </show_cat_on_toplevel>
+                        <vertnav_root translate="label" module="vertnav">
+                            <label>Root Categories</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>vertnav/system_config_source_root</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </vertnav_root>
+                        <fallback_to_root translate="label" module="vertnav">
+                            <label>Fallback to store base</label>
+                            <comment>If no current category is selected</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </fallback_to_root>
+                    </fields>
+                </vertnav>
+            </groups>
+        </catalog>
+    </sections>
 </config>
