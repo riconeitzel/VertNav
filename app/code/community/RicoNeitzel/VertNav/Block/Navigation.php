@@ -154,7 +154,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         $productCount = '';
         if ($this->displayProductCount()) {
             $num = Mage::getModel('catalog/layer')
-                ->setCurrentCategory($category->getID())->getProductCollection()->getSize();
+                ->setCurrentCategory($category->getId())->getProductCollection()->getSize();
             $productCount = '<span class="product-count"> (' . $num . ')</span>';
         }
 
