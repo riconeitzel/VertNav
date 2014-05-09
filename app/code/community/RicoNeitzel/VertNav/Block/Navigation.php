@@ -297,7 +297,8 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      */
     protected function _isCurrentCategory($category)
     {
-        return ($cat = $this->getCurrentCategory()) && $cat->getId() == $category->getId();
+        $cat = $this->getCurrentCategory();
+        return $cat && $cat->getId() == $category->getId();
     }
 
     /**
