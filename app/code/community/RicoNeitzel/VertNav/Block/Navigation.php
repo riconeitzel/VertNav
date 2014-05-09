@@ -180,6 +180,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
             //usort($children, array($this, '_sortCategoryArrayByName'));
 
+            $childrenCount = 0;
             $hasChildren = $children && ($childrenCount = count($children));
             if ($hasChildren) {
                 $children = $this->toLinearArray($children);
