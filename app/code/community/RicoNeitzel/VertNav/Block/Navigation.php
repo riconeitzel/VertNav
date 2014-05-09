@@ -229,19 +229,27 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
     }
 
     /**
-     * I need an array with the index being continunig numbers, so
+     * I need an array with the index being continuing numbers, so
      * it's possible to check for the previous/next category
      *
-     * @param mixed $collection
-     *
+     * @param array|Varien_Data_Collection $collection
      * @return array
+     * @throws Mage_Core_Exception
      */
     public function toLinearArray($collection)
     {
-        $array = array();
-        foreach ($collection as $item) {
-            $array[] = $item;
+        if (is_array($collection)) {
+            $array = $collection;
+        } elseif (is_object($collection) && $collection instanceof Varien_Data_Collection) {
+            $array = $collection->getItems();
+        } else {
+            $type = is_object($collection) ? get_class($collection) : gettype($collection);
+            
+            throw new Mage_Core_Exception(
+                $this->__('Invalid argument type "%s" passed to toLinearArray()', $type)
+            );
         }
+        $array = array_values($array);
         return $array;
     }
 
