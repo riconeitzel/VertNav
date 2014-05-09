@@ -163,7 +163,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
             '<span class="vertnav-cat"><a href="' .
             $this->getCategoryUrl($category) .
             '"><span>' .
-            $this->htmlEscape($category->getName()) .
+            $this->escapeHtml($category->getName()) .
             '</span></a>' . $productCount . "</span>\n";
 
         $autoMaxDepth = Mage::getStoreConfig('catalog/vertnav/expand_all_max_depth');
