@@ -37,6 +37,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      * Netzarbeiter_LoginCatalog
      * Also add the current product and current cms page id if they exist if
      * this block has been added to a cms or product detail page.
+     * 
      * @return string
      */
     public function getCacheKey()
@@ -53,6 +54,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
     /**
      * check if we should hide the categories because of Netzarbeiter_LoginCatalog
+     * 
      * @return boolean
      */
     protected function _checkLoginCatalog()
@@ -62,6 +64,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
     /**
      * Check if the Netzarbeiter_LoginCatalog extension is installed and active
+     * 
      * @return boolean
      */
     protected function _isLoginCatalogInstalledAndActive()
@@ -74,6 +77,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
     /**
      * Check if the Netzarbeiter_LoginCatalog extension is configured to hide categories from logged out customers
+     * 
      * @return boolean
      */
     protected function _loginCatalogHideCategories()
@@ -94,7 +98,6 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      * @param Varien_Data_Tree_Node $category
      * @param int                   $level
      * @param bool                  $last
-     *
      * @return string
      */
     public function drawItem($category, $level = 0, $last = false)
@@ -108,10 +111,9 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
     /**
      * Add project specific formatting
      *
-     * @param Mage_Model_Catalog_Category $category
-     * @param integer                     $level
+     * @param Mage_Catalog_Model_Category $category
+     * @param int                         $level
      * @param array                       $levelClass
-     *
      * @return string
      */
     public function drawOpenCategoryItem($category, $level = 0, array $levelClass = NULL)
@@ -247,7 +249,6 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      *
      * @param Mage_Catalog_Model_Category $arg1
      * @param Mage_Catalog_Model_Category $arg2
-     *
      * @return int
      * @deprecated
      */
@@ -260,7 +261,6 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      * Convert the category name into a string that can be used as a css class
      *
      * @param Mage_Catalog_Model_Category $category
-     *
      * @return string
      */
     protected function _getClassNameFromCategoryName($category)
@@ -274,7 +274,8 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
     /**
      * Return the current customer group id. Logged out customers get the group id 0,
      * not the default set in system > config > customers
-     * @return integer
+     * 
+     * @return int
      */
     protected function _getCustomerGroupId()
     {
@@ -291,7 +292,6 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      * Check if the current category matches the passed in category
      *
      * @param Mage_Catalog_Model_Category $category
-     *
      * @return bool
      */
     protected function _isCurrentCategory($category)
@@ -303,7 +303,6 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      * Return the number of products assigned to the category
      *
      * @param Mage_Catalog_Model_Category|Varien_Data_Tree_Node $category
-     *
      * @return int
      */
     protected function _getProductCount($category)
@@ -323,17 +322,19 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      * Get the number of products from a category tree node
      *
      * @param Varien_Data_Tree_Node $category
-     *
      * @return int
      */
     protected function _getProductCountFromTreeNode(Varien_Data_Tree_Node $category)
     {
-        return Mage::getSingleton('catalog/category')->setId($category->getId())->getProductCount();
+        return Mage::getSingleton('catalog/category')
+            ->setId($category->getId())
+            ->getProductCount();
     }
 
     /**
-     * Get catagories of current store, using the max depth setting for the vertical navigation
-     * @return Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection
+     * Get categories of current store, using the max depth setting for the vertical navigation
+     * 
+     * @return Mage_Catalog_Model_Resource_Category_Collection
      */
     public function getStoreCategories()
     {
@@ -420,7 +421,8 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
     }
 
     /**
-     * $childrenIdString is a comma seperated list of category IDs
+     * $childrenIdString is a comma separated list of category IDs
+     * 
      * @return Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection
      */
     protected function _getCategoryCollection()
@@ -444,7 +446,6 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
     /**
      * @param Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection $collection
-     *
      * @return RicoNeitzel_VertNav_Block_Navigation
      * @deprecated Now the count is added directly in _getCategoryChildren()
      * @see        _getCategoryChildren()
