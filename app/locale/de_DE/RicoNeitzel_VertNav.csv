@@ -14,3 +14,5 @@
 "Category Level %d","Kategorie Ebene %d"
 "Expand on Top Level","Aufklappen, wenn Artikel direkt aufgerufen wird"
 "If your product is top level requested without a category path should VertNav expand the category listing to the first associated product category.","Soll der Kategoriebaum zur ersten, dem Artikel zugewiesenen Kategorie aufgeklappt werden, wenn der Artikel direkt (ohne Kategoriepfad in der URL) aufgerufen wurde?"
+"Add trailing slash","Trailing Slash hinzufügen"
+"Add a trailing slash to the generated url, e.g. http://mydomain.com/category-url-key<strong style=""color:red;"">/</strong>","An die Kategorie-URL wird ein schließender Schrägstrich angehängt, z.B. http://meinedomain.com/kategorie-url-key<strong style=""color:red;"">/</strong>"

@@ -74,6 +74,7 @@
                 <hide_vertnav>0</hide_vertnav>
                 <vertnav_root>root</vertnav_root>
                 <fallback_to_root>1</fallback_to_root>
+                <add_trailing_slash>0</add_trailing_slash>
             </vertnav>
         </catalog>
     </default>
