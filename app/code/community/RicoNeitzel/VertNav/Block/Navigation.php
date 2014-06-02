@@ -37,7 +37,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      * Netzarbeiter_LoginCatalog
      * Also add the current product and current cms page id if they exist if
      * this block has been added to a cms or product detail page.
-     * 
+     *
      * @return string
      */
     public function getCacheKey()
@@ -54,7 +54,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
     /**
      * check if we should hide the categories because of Netzarbeiter_LoginCatalog
-     * 
+     *
      * @return boolean
      */
     protected function _checkLoginCatalog()
@@ -64,7 +64,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
     /**
      * Check if the Netzarbeiter_LoginCatalog extension is installed and active
-     * 
+     *
      * @return boolean
      */
     protected function _isLoginCatalogInstalledAndActive()
@@ -77,7 +77,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
     /**
      * Check if the Netzarbeiter_LoginCatalog extension is configured to hide categories from logged out customers
-     * 
+     *
      * @return boolean
      */
     protected function _loginCatalogHideCategories()
@@ -159,9 +159,14 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         }
 
         // indent HTML!
+        $url = $this->getCategoryUrl( $category );
+        if (Mage::getStoreConfig('catalog/vertnav/add_trailing_slash'))
+        {
+            $url .= substr($url, -1) != '/' ? '/' : '';
+        }
         $html[1] = str_pad("", (($level * 2) + 4), " ") .
             '<span class="vertnav-cat"><a href="' .
-            $this->getCategoryUrl($category) .
+            $url .
             '"><span>' .
             $this->escapeHtml($category->getName()) .
             '</span></a>' . $productCount . "</span>\n";
@@ -244,7 +249,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
             $array = $collection->getItems();
         } else {
             $type = is_object($collection) ? get_class($collection) : gettype($collection);
-            
+
             throw new Mage_Core_Exception(
                 $this->__('Invalid argument type "%s" passed to toLinearArray()', $type)
             );
@@ -283,7 +288,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
     /**
      * Return the current customer group id. Logged out customers get the group id 0,
      * not the default set in system > config > customers
-     * 
+     *
      * @return int
      */
     protected function _getCustomerGroupId()
@@ -343,7 +348,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
     /**
      * Get categories of current store, using the max depth setting for the vertical navigation
-     * 
+     *
      * @return Mage_Catalog_Model_Resource_Category_Collection
      */
     public function getStoreCategories()
@@ -432,7 +437,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 
     /**
      * $childrenIdString is a comma separated list of category IDs
-     * 
+     *
      * @return Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection
      */
     protected function _getCategoryCollection()
