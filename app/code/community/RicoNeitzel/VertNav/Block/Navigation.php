@@ -29,9 +29,14 @@
  */
 class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
 {
-    protected $_storeCategories;
+    /** @var Mage_Catalog_Model_Resource_Category_Collection */
+    protected $_baseCategories;
+    
+    /** @var int */
     protected $_rootCategoryId;
-
+    
+    /** @var  Mage_Catalog_Model_Category[] */
+    protected $_categoriesByParentId;
 
     /**
      * Add the customer group to the cache key so this module is compatible with more extensions.
@@ -145,7 +150,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         }
         $levelClass[] = implode('-', $combineClasses);
 
-        if ($category->hasChildren()) {
+        if ($this->_hasCategoryChildren($category)) {
             $levelClass[] = 'has-children';
         }
 
@@ -176,9 +181,7 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
             ($autoExpand && $autoMaxDepth == 0) ||
             ($autoExpand && $autoMaxDepth > $level + 1)
         ) {
-            $children = $this->_getCategoryCollection()->addIdFilter($category->getChildren());
-
-            $children = $this->toLinearArray($children);
+            $children = $this->_getChildrenCategories($category);
 
             //usort($children, array($this, '_sortCategoryArrayByName'));
 
@@ -350,8 +353,8 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
      */
     public function getStoreCategories()
     {
-        if (isset($this->_storeCategories)) {
-            return $this->_storeCategories;
+        if (isset($this->_baseCategories)) {
+            return $this->_baseCategories;
         }
 
         /* @var $category Mage_Catalog_Model_Category */
@@ -381,10 +384,9 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
         if (!$parent || !$category->checkId($parent)) {
             return array();
         }
-        $storeCategories = $this->_getCategoryCollection()->addFieldToFilter('parent_id', $parent);
+        $this->_baseCategories = $this->_getChildrenCategories($parent);
 
-        $this->_storeCategories = $storeCategories;
-        return $storeCategories;
+        return $this->_baseCategories;
     }
 
     /**
@@ -520,5 +522,74 @@ class RicoNeitzel_VertNav_Block_Navigation extends Mage_Catalog_Block_Navigation
     public function displayProductCount()
     {
         return Mage::getStoreConfigFlag('catalog/vertnav/display_product_count');
+    }
+
+    /**
+     * @param int|Mage_Catalog_Model_Category $parentCategory
+     * @return Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Category[]
+     */
+    protected function _getChildrenCategories($parentCategory)
+    {
+        if ($this->_preloadCategories()) {
+
+            if ($parentCategory instanceof Mage_Catalog_Model_Category) {
+                $categoryId = $parentCategory->getId();
+            } else {
+                $categoryId = $parentCategory;
+            }
+
+            if (isset($this->_categoriesByParentId[$categoryId])) {
+                return $this->_categoriesByParentId[$categoryId];
+            }
+
+            return array();
+        }
+        
+        if (!$parentCategory instanceof Mage_Catalog_Model_Category) {
+            $parentCategory = Mage::getModel('catalog/category')->load($parentCategory);
+        }
+        
+        return $this->_getCategoryCollection()->addIdFilter($parentCategory->getChildren());
+    }
+
+    /**
+     * @param $category
+     * @return mixed
+     */
+    protected function _hasCategoryChildren($category)
+    {
+        if ($this->_preloadCategories()) {
+            return isset($this->_categoriesByParentId[$category->getId()]);
+        }
+        return $category->hasChildren();
+    }
+
+    /**
+     * @return bool
+     */
+    protected function _preloadCategories()
+    {
+        if (!is_null($this->_categoriesByParentId)) {
+            return true;
+        }
+        
+        $autoMaxDepth = Mage::getStoreConfig('catalog/vertnav/expand_all_max_depth');
+        $autoExpand = Mage::getStoreConfig('catalog/vertnav/expand_all');
+
+        $this->_categoriesByParentId = array();
+        if ($autoExpand) {
+            $categories = $this->_getCategoryCollection();
+            $categories
+                ->addFieldToFilter('level', array('gteq' => 2));
+            if ($autoMaxDepth > 0) {
+                $categories
+                    ->addFieldToFilter('level', array('lteq' => $autoMaxDepth + 1));
+            }
+            foreach ($categories as $category) {
+                $this->_categoriesByParentId[$category->getParentId()][] = $category;
+            }
+            return true;
+        }
+        return false;
     }
 }
